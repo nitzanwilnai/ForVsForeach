@@ -738,8 +738,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Result: {fileID: 1047312240}
-  ArraySize: 1000000
-  NumIterations: 100000
+  ArraySize: 10000
+  NumIterations: 10000
+  m_array: 
 --- !u!4 &888827480
 Transform:
   m_ObjectHideFlags: 0
