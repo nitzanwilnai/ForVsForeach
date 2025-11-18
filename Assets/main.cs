@@ -20,6 +20,10 @@ public class main : MonoBehaviour
         double forTime = 0.0d;
         double forTimeCached = 0.0f;
         double foreachTime = 0.0d;
+
+        double forTimeFA = 0.0d;
+        double forTimeCachedFA = 0.0f;
+        double foreachTimeFA = 0.0d;
         for (int t = 0; t < NumIterations; t++)
         {
             double time;
@@ -35,11 +39,26 @@ public class main : MonoBehaviour
             time = Time.realtimeSinceStartupAsDouble;
             forEachTest(m_array);
             foreachTime += Time.realtimeSinceStartupAsDouble - time;
+
+            time = Time.realtimeSinceStartupAsDouble;
+            forTestFA();
+            forTimeFA += Time.realtimeSinceStartupAsDouble - time;
+
+            time = Time.realtimeSinceStartupAsDouble;
+            forTestCachedLengthFA();
+            forTimeCachedFA += Time.realtimeSinceStartupAsDouble - time;
+
+            time = Time.realtimeSinceStartupAsDouble;
+            forEachTestFA();
+            foreachTimeFA += Time.realtimeSinceStartupAsDouble - time;
         }
         string s = "Results:\n";
-        s += "For time " + forTime + "\n'";
+        s += "For time " + forTime + "\n";
         s += "For cached time " + forTimeCached + "\n";
         s += "Foreach time " + foreachTime + "\n";
+        s += "For time field access " + forTimeFA + "\n";
+        s += "For cached time field acess " + forTimeCachedFA + "\n";
+        s += "Foreach time field access " + foreachTimeFA + "\n";
         Result.text = s;
     }
 
@@ -64,6 +83,31 @@ public class main : MonoBehaviour
     {
         int sum = 0;
         foreach (int value in array)
+            sum += value;
+        return sum;
+    }
+
+    int forTestFA()
+    {
+        int sum = 0;
+        for (int i = 0; i < m_array.Length; i++)
+            sum += m_array[i];
+        return sum;
+    }
+
+    int forTestCachedLengthFA()
+    {
+        int sum = 0;
+        int length = m_array.Length;
+        for (int i = 0; i < length; i++)
+            sum += m_array[i];
+        return sum;
+    }
+
+    int forEachTestFA()
+    {
+        int sum = 0;
+        foreach (int value in m_array)
             sum += value;
         return sum;
     }
